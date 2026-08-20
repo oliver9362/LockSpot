@@ -2,7 +2,7 @@
 
 CITIES = {
     "liverpool": {"south": 53.35, "north": 53.45, "west": -3.02, "east": -2.85},
-    "manchester": {"south": 53.43, "north": 53.52, "west": -2.30, "east": -2.18},
+    "cambridge": {"south": 52.17, "north": 52.25, "west": 0.09, "east": 0.18},
 }
 
 # Coordinate reference systems

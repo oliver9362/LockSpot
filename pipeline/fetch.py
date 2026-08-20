@@ -56,6 +56,7 @@ def fetch_city_month(city, bbox, month):
 def main():
     os.makedirs(RAW, exist_ok=True)
     months = available_months()
+    all_rows = []
     for city, bbox in CITIES.items():
         for month in months:
             rows = fetch_city_month(city, bbox, month)
