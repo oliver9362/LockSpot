@@ -9,6 +9,7 @@ import requests
 from pipeline.config import CITIES, RAW
 
 OVERPASS = "https://overpass-api.de/api/interpreter"
+HEADERS = {"User-Agent": "LockSpot/0.1 (bike theft risk map; github.com/oliver9362/LockSpot)"}
 
 QUERY = """
 [out:json][timeout:180];
@@ -27,7 +28,7 @@ def fetch_raw(city, bbox):
             return json.load(f)
 
     print(f" {city}: querying Overpass")
-    r = requests.post(OVERPASS, data={"data":  QUERY.format(**bbox)}, timeout=300)
+    r = requests.post(OVERPASS, data={"data": QUERY.format(**bbox)},headers=HEADERS, timeout=300)
     r.raise_for_status()
     data = r.json()
     with open(path, "w") as f:
@@ -63,7 +64,7 @@ def parse(data, city):
 def clean_capacity(value):
     if value is None:
         return None
-    text = str(value).strip().split(";")[0].replalce("~", "").replace("+", "")
+    text = str(value).strip().split(";")[0].replace("~", "").replace("+", "")
     try:
         n = float(text)
     except ValueError:
